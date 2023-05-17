@@ -6661,11 +6661,11 @@ each park, to be able to create an interactive areas that revealed how
 many tigers were in each park.</p>
 <pre class="r"><code>#Import the shapefile and rename it
 IDN_shapefile &lt;- st_read(here(&quot;..&quot;, &quot;Data&quot;, &quot;gadm41_IDN_shp&quot;))</code></pre>
-<pre><code>## Multiple layers are present in data source C:\Users\jadeh\OneDrive\Documents\Coding Project\Data\gadm41_IDN_shp, reading layer `gadm41_IDN_0&#39;.
+<pre><code>## Multiple layers are present in data source C:\Users\jadeh\OneDrive\Documents\Coding Project\SumatranTigerProject\Data\gadm41_IDN_shp, reading layer `gadm41_IDN_0&#39;.
 ## Use `st_layers&#39; to list all layer names and their type in a data source.
 ## Set the `layer&#39; argument in `st_read&#39; to read a particular layer.
 ## Reading layer `gadm41_IDN_0&#39; from data source 
-##   `C:\Users\jadeh\OneDrive\Documents\Coding Project\Data\gadm41_IDN_shp&#39; 
+##   `C:\Users\jadeh\OneDrive\Documents\Coding Project\SumatranTigerProject\Data\gadm41_IDN_shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 1 feature and 2 fields
 ## Geometry type: MULTIPOLYGON
@@ -6978,8 +6978,8 @@ map_3 &lt;- tm_shape(IDN_shapefile) + #Maps the outline of the shapefile
 tmap_save(map,
   filename = 
     &quot;C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\National_Parks&quot;)</code></pre>
-<div id="question-1-where-do-the-majority-of-sumatran-reside" class="section level2">
-<h2>Question 1: Where do the majority of Sumatran reside?</h2>
+<div id="question-1-where-do-the-majority-of-sumatran-tigers-reside" class="section level2">
+<h2>Question 1: Where do the majority of Sumatran tigers reside?</h2>
 <p>Through this visualisation, I have been able to highlight the three
 major national parks in which Sumatran tigers mostly reside. In doing
 do, this demonstrates how confined the tigers are in their habitats, as
@@ -6991,9 +6991,9 @@ likelihood of their extinction given the reduced number of viable
 habitations.</p>
 </div>
 </div>
-<div id="data-visualisation-2-zoomed-in-map-of-sumatra-highlighting-the-number-and-gender-of-tigers-spotted-in-each-national-park" class="section level1">
-<h1>Data Visualisation 2: Zoomed in Map of Sumatra highlighting The
-Number And Gender Of tigers Spotted In Each National Park</h1>
+<div id="data-visualisation-number-2-zoomed-in-map-of-sumatra-highlighting-the-number-and-gender-of-tigers-spotted-in-each-national-park" class="section level1">
+<h1>Data Visualisation Number 2: Zoomed in Map of Sumatra Highlighting
+The Number And Gender Of tigers Spotted In Each National Park</h1>
 <pre class="r"><code>#This incorporates all the for loops into one loop to output the average points
  
 # Making a list of zeros for the x coordinates to be added to
@@ -7026,17 +7026,18 @@ for(i in 1:length(Parks)){ # Looping through the different parks
  
   latitude[i] &lt;- mean(mean_y) #create a variable of the mean y coordinate
 }  
- 
+
+#create new data frame of average longitude and latitude coordinates 
 geocode &lt;- data.frame(longitude, latitude)
  
 geocode2 &lt;- st_as_sf(geocode, coords= c(&quot;longitude&quot;, &quot;latitude&quot;), crs= 4326)
- 
+#make it compatible with spatial data using st_as_sf 
  
 
 
 map_4 &lt;- tm_shape(IDN_shapefile, bbox= bbox_new) + #add new boundary to the whole shapefile
 
-  tm_polygons() +
+  tm_polygons() + #add polygons
 
   tm_shape(IDN_provinces, bbox= bbox_new) + #add new boundary to the provinces df
 
@@ -7046,11 +7047,11 @@ map_4 &lt;- tm_shape(IDN_shapefile, bbox= bbox_new) + #add new boundary to the w
 
   tm_shape(filtered_parks, bbox= bbox_new)+ #add national park regions and add new boundary to the national parks df
 
-  tm_fill(col = &quot;National_Parks&quot;,
+  tm_fill(col = &quot;National_Parks&quot;, #overlay national parks
 
           palette = c(&quot;#E5F5E0&quot;, &quot;#A1D99B&quot;, &quot;#31A354&quot;), #Use RColBrewer palette to colour the national parks with a green colourscheme
 
-          position= c(&quot;RIGHT&quot;, &quot;BOTTOM&quot;)) +
+          position= c(&quot;RIGHT&quot;, &quot;BOTTOM&quot;)) + #change the position
 
   tm_xlab(&quot;Longitude&quot;)+ #Label x-axis
 
@@ -7169,9 +7170,9 @@ heritage sites where the forests remain in tact.</p>
 <p>This bar chart provides a good overview of the number and gender of
 the tigers residing in the national parks.</p>
 </div>
-<div id="question-3-1" class="section level2">
-<h2>Question 3</h2>
-<p>Which national park has the largest Sumatran tiger population?</p>
+<div id="question-3-which-national-park-has-the-largest-sumatran-tiger-population" class="section level2">
+<h2>Question 3: Which national park has the largest Sumatran tiger
+population?</h2>
 <p>Interestingly, Bukit Barisan Selatan had the largest tiger
 population, despite being the smallest park. This could suggest that it
 has a more robust tiger population, with eight male and five female
@@ -7191,9 +7192,9 @@ primary aim of the study: elucidating how the number and gender of
 tigers inhabiting the three main Sumatran national parks.</p>
 </div>
 </div>
-<div id="data-visualisation-number-3-pie-chart-showing-the-gender-proportions-of-sighted-across-all-national-parks" class="section level1">
+<div id="data-visualisation-number-3-pie-chart-showing-the-gender-proportions-of-sighted-tigers-across-all-national-parks" class="section level1">
 <h1>Data Visualisation Number 3: Pie Chart Showing The Gender
-Proportions Of Sighted Across All National Parks</h1>
+Proportions Of Sighted Tigers Across All National Parks</h1>
 <pre class="r"><code>#Create a pie chart representing the percentage of each gender
 pie_chart &lt;- new_tiger_bar %&gt;%
   group_by(Sex) %&gt;%
