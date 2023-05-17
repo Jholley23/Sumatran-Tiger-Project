@@ -365,7 +365,7 @@ tmap_save(map,
     "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\National_Parks")
 ```
  
-## Question 1: Where do the majority of Sumatran \textcolor{orange}{tigers} reside?
+## Question 1: Where do the majority of Sumatran tigers reside?
  
 Through this visualisation, I have been able to highlight the three major national parks in which Sumatran tigers mostly reside. In doing do, this demonstrates how confined the tigers are in their habitats, as a direct result of deforestation.
  
@@ -380,8 +380,7 @@ This map also uses a bounding box to highlight Sumatra as the region of interest
  
 #This will allow us to overlay the tiger data onto these areas
  
-#======================================================================================================
- 
+
 #Remove unnecessary columns with unwanted data to tidy up the data set (should help to run quicker)
 filtered_parks <- filtered_parks %>%
   select(GID_2, GID_1, NAME_1, NAME_2, TYPE_2, CC_2, HASC_2, geometry, National_Parks)
@@ -389,7 +388,7 @@ filtered_parks <- filtered_parks %>%
 #Assign names to each national park
 Parks <- c("Gunung Leuser", "Bukit Barisan Selatan", "Kerinci Seblat")
  
-#=========================================================================================================
+
 #Use filter to create a dataframe with just Gunung Leuser park
  
 #filter only Gunung Leuser park multipolygons
@@ -435,8 +434,8 @@ GL_x_coord <- mean(GL_mean_x) #create a variable of the mean x coordinate
  
 GL_y_coord <- mean(GL_mean_y) #create a variable of the mean y coordinate
  
- 
-#===========================================================================================================
+
+
 #Use filter to create a dataframe with just Bukit Barisan Selatan park
  
 #filter only Bukit Barisan Selatan park multipolygons
@@ -480,8 +479,8 @@ BBB_x_coord <- mean(BBB_mean_x) #create a variable of the mean x coordinate
  
 BBB_y_coord <- mean(BBB_mean_y) #create a variable of the mean y coordinate
  
- 
-#============================================================================================================
+
+
 #Use filter to create a dataframe with just Bukit Barisan Selatan park
  
 #filter only Bukit Barisan Selatan park multipolygons
@@ -525,7 +524,6 @@ KS_x_coord <- mean(KS_mean_x) #create a variable of the mean x coordinate
  
 KS_y_coord <- mean(KS_mean_y) #create a variable of the mean y coordinate
  
-#=================================================================================================
  
  
 #create a variable for the three x and 3 coordinates for the map
@@ -543,7 +541,7 @@ geocode2 <- st_as_sf(geocode, coords= c("longitude", "latitude"), crs= 4326)
 ```
 
  
-# Data Visualisation 2: Zoomed in Map of Sumatra highlighting The Number And Gender Of tigers Spotted In Each National Park
+# Data Visualisation Number 2: Zoomed in Map of Sumatra Highlighting The Number And Gender Of tigers Spotted In Each National Park
 ```{r, include=TRUE, fig.show='hold', out.width= "50%"}
  
 #This incorporates all the for loops into one loop to output the average points
@@ -578,17 +576,18 @@ for(i in 1:length(Parks)){ # Looping through the different parks
  
   latitude[i] <- mean(mean_y) #create a variable of the mean y coordinate
 }  
- 
+
+#create new data frame of average longitude and latitude coordinates 
 geocode <- data.frame(longitude, latitude)
  
 geocode2 <- st_as_sf(geocode, coords= c("longitude", "latitude"), crs= 4326)
- 
+#make it compatible with spatial data using st_as_sf 
  
 
 
 map_4 <- tm_shape(IDN_shapefile, bbox= bbox_new) + #add new boundary to the whole shapefile
 
-  tm_polygons() +
+  tm_polygons() + #add polygons
 
   tm_shape(IDN_provinces, bbox= bbox_new) + #add new boundary to the provinces df
 
@@ -598,11 +597,11 @@ map_4 <- tm_shape(IDN_shapefile, bbox= bbox_new) + #add new boundary to the whol
 
   tm_shape(filtered_parks, bbox= bbox_new)+ #add national park regions and add new boundary to the national parks df
 
-  tm_fill(col = "National_Parks",
+  tm_fill(col = "National_Parks", #overlay national parks
 
           palette = c("#E5F5E0", "#A1D99B", "#31A354"), #Use RColBrewer palette to colour the national parks with a green colourscheme
 
-          position= c("RIGHT", "BOTTOM")) +
+          position= c("RIGHT", "BOTTOM")) + #change the position
 
   tm_xlab("Longitude")+ #Label x-axis
 
@@ -714,8 +713,7 @@ This main visualisation demonstrates that across the three national parks, only 
 
 This bar chart provides a good overview of the number and gender of the tigers residing in the national parks.
 
-## Question 3
-Which national park has the largest Sumatran tiger population?
+## Question 3: Which national park has the largest Sumatran tiger population?
  
 Interestingly, Bukit Barisan Selatan had the largest tiger population, despite being the smallest park. This could suggest that it has a more robust tiger population, with eight male and five female tigers, which increases the likelihood of breeding. However, it could also be that fewer tigers were sighted in the other parks as they are considerably larger in size, making tiger camera captures less likely. This is something that future research could establish with monitoring of tigers over a longer period of time, and with more cameras across the landscape.
  
@@ -725,7 +723,7 @@ These two visualisations together are complimentary in meeting the primary aim o
  
  
  
-# Data Visualisation Number 3: Pie Chart Showing The Gender Proportions Of Sighted Across All National Parks
+# Data Visualisation Number 3: Pie Chart Showing The Gender Proportions Of Sighted Tigers Across All National Parks
  
 ```{r, include=TRUE, out.width="110%", warning=FALSE, error=FALSE}
 #Create a pie chart representing the percentage of each gender
@@ -767,8 +765,10 @@ However, the gender of 20.8% of the tigers that were sighted could not be identi
 
 
 ```{r, include=FALSE, results='asis'}
-# I have been able to generate an interactive leaflet map of Sumatra
-#I was going to use this as my main visualisation but unfortunately, neither my PC nor those at the University had sufficient RAM storage (32GB) to knit it to HTML, however, I was able to generate it in both the r notebook and rmarkdown, so I thought I would include it in the code, as I feel it answers the research questions and demonstrates exactly what I wanted to achieve with this project.
+
+# I generated an interactive leaflet map of Sumatra
+#I was going to use this as my main visualisation but unfortunately, neither my PC nor those at the University had sufficient RAM storage (32GB) to knit it to HTML,
+#However, I was able to generate it in both the r notebook and rmarkdown, so I thought I would include it in the code, as I feel it answers the research questions and demonstrates exactly what I wanted to achieve with this project alongside the other visualisations
 
 
 #This incorporates all the for loops into one loop to output the average points
@@ -808,11 +808,12 @@ geocode <- data.frame(longitude, latitude)
  
 geocode2 <- st_as_sf(geocode, coords= c("longitude", "latitude"), crs= 4326)
  
- 
+
+# add a column of total_tigers to the geocode2 dataframe to create popups in the leaflet map 
 geocode_map <- geocode2 %>%
   mutate(geocode, total_tigers = c(5, 17, 2))
  
-tmap_mode("view")
+tmap_mode("view") #set the mode to view instead of plot
  
 map_4 <- tm_shape(IDN_shapefile, bbox= bbox_new) + #add new boundary to the whole shapefile
  
@@ -854,28 +855,30 @@ map_4 <- tm_shape(IDN_shapefile, bbox= bbox_new) + #add new boundary to the whol
            
             legend.text.size = 0.6) + #change size of legend text size
  
-  tm_shape(geocode_map)+
+  tm_shape(geocode_map)+ #add average coordinates
  
-  tm_markers(col="red", size=0.3)
+  tm_markers(col="red", size=0.3) #change colour and size of coordinate points
  
-
-  map_leaflet <- tmap_leaflet(map_4) %>%
+#create a leaflet map for interactivity
+  map_leaflet <- tmap_leaflet(map_4) %>% #tmap_leaflet joins tmap to a leaflet map
   addTiles() %>%
-    addCircleMarkers(data= geocode_map,
-                     color= "red",
-                     radius= 0.3,
+    addCircleMarkers(data= geocode_map, #overlay coordinate points
+                     color= "red", #change the colour of the coordinate points
+                     radius= 0.3, #set the radius size
                      popup= paste0("<b>total_tigers:</b>",
                                    geocode_map$total_tigers, "<br>"))
   setView(map_leaflet, lng = 101.302282, lat =0.113824 , zoom = 1)
-  setMaxBounds(map_leaflet,
+  #set the longitude and latitude coordinates to specify where the map focuses
+  setMaxBounds(map_leaflet, 
     lng1 = 88,
     lat1 = -11,
     lng2 = 135,
     lat2 = 16
+    #set boundaries for how far around the focus area you can move in the interactive map
   )
 
  
-map_leaflet 
+map_leaflet  #print the map
 
 ```
  
