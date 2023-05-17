@@ -169,6 +169,7 @@ Then I wrangled this new data frame to exclude unnecessary rows from the data.
 #Create a new dataframe which filters out NA values from  National_Parks column
 filtered_parks <- dplyr::filter(National_parks, National_Parks %in% c(
   "Gunung Leuser", "Bukit Barisan Selatan", "Kerinci Seblat"))
+
 ```
  
 # **Data wrangling the raw data from Matt Luskin**
@@ -349,7 +350,7 @@ map_3 <- tm_shape(IDN_shapefile) + #Maps the outline of the shapefile
 ```
  
 ```{r, include=TRUE, warning=FALSE, error=FALSE}
-tmap_arrange(map_2, map_3, #Group map_2 and map_3 into one view
+nationalpark <- tmap_arrange(map_2, map_3, #Group map_2 and map_3 into one view
   ncol = NA, #change number of columns
   nrow = NA, # change number of rows
   widths = NA, #change width of visualisation
@@ -359,10 +360,12 @@ tmap_arrange(map_2, map_3, #Group map_2 and map_3 into one view
   outer.margins = 0.02 #Change the outer margins
 )
 
+print(nationalpark)
+
 #save map
 tmap_save(map,
   filename = 
-    "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\National_Parks")
+    "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\National_Parks.png")
 ```
  
 ## Question 1: Where do the majority of Sumatran tigers reside?
@@ -647,7 +650,7 @@ print(map_4) #print the map
 #save map
 tmap_save(map_4,
   filename = 
-    "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\Close_Up_Sumatra")
+    "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\Close_Up_Sumatra.png")
 
 #Create a stacked bar chart
 #First create a new column with total number of tigers spotted based on gender
