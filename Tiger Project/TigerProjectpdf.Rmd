@@ -84,7 +84,7 @@ IDN_shapefile <- st_read(here("..", "Data", "gadm41_IDN_shp"))
 st_layers(here("..", "Data", "gadm41_IDN_shp"))
 ```
  
-Secondly, the data pertaining to the \textcolor{orange}{tigers} was sourced from [(Luskin et al. 2017)](https://doi.org/10.1038/s41467-017-01656-4). I contacted the author directly via email to which he responded with the raw data files and a dropbox of tiger images captured during the authors’ research. The primary file used was “TigerCapturesSumatra.csv” which contained 7 variables, some of which were wrangled to extract specific information. This dataset contained a vast amount of data that were not required for the analysis, so I have utilised only two of the variables: “Sex”, and “AnimalID”, though some of these variables were wrangled to extract pertinent information. I have then created some new variables e.g. to sum the total number of female/male/unknown gendered tigers sighted for the pie chart.
+Secondly, the data pertaining to the \textcolor{orange}{tigers} was sourced from [(Luskin et al. 2017)](https://doi.org/10.1038/s41467-017-01656-4). I contacted the author directly via email to which he responded with the raw data files and a dropbox of tiger images captured during the authors’ research. The primary file used was “TigerCapturesSumatra.csv” which contained 7 variables, some of which were wrangled to extract specific information. This dataset contained a vast amount of data that were not required for the analysis, so I have utilised only two of the variables: “Sex”, and “AnimalID”, though some of these variables were wrangled to extract pertinent information. I have then created some new variables e.g. to sum the total number of female/male/unknown gendered \textcolor{orange}{tigers} sighted for the pie chart.
  
  
 ```{r, include=TRUE, message=FALSE, warning=FALSE}
@@ -365,10 +365,12 @@ nationalpark <- tmap_arrange(map_2, map_3, #Group map_2 and map_3 into one view
   outer.margins = 0.02 #Change the outer margins
 )
 
+print(nationalpark)
+
 #save map
 tmap_save(map,
   filename = 
-    "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\National_Parks")
+    "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\National_Parks.png")
 ```
  
 ## Question 1: Where Do The Majority Of Sumatran \textcolor{orange}{Tigers} Reside?
@@ -387,7 +389,7 @@ again emphasises their worldwide confinement an
  
 #This will allow us to overlay the tiger data onto these areas
  
-#======================================================================================================
+
  
 #Remove unnecessary columns with unwanted data to tidy up the data set 
 #should help to run quicker
@@ -397,7 +399,7 @@ filtered_parks <- filtered_parks %>%
 #Assign names to each national park
 Parks <- c("Gunung Leuser", "Bukit Barisan Selatan", "Kerinci Seblat")
  
-#=========================================================================================================
+
 #Use filter to create a dataframe with just Gunung Leuser park
  
 #filter only Gunung Leuser park multipolygons
@@ -444,7 +446,7 @@ GL_x_coord <- mean(GL_mean_x) #create a variable of the mean x coordinate
 GL_y_coord <- mean(GL_mean_y) #create a variable of the mean y coordinate
  
  
-#===========================================================================================================
+
 #Use filter to create a dataframe with just Bukit Barisan Selatan park
  
 #filter only Bukit Barisan Selatan park multipolygons
@@ -488,8 +490,7 @@ BBB_x_coord <- mean(BBB_mean_x) #create a variable of the mean x coordinate
  
 BBB_y_coord <- mean(BBB_mean_y) #create a variable of the mean y coordinate
  
- 
-#============================================================================================================
+
 #Use filter to create a dataframe with just Bukit Barisan Selatan park
  
 #filter only Bukit Barisan Selatan park multipolygons
@@ -533,7 +534,6 @@ KS_x_coord <- mean(KS_mean_x) #create a variable of the mean x coordinate
  
 KS_y_coord <- mean(KS_mean_y) #create a variable of the mean y coordinate
  
-#=================================================================================================
  
  
 #create a variable for the three x and 3 coordinates for the map
@@ -669,7 +669,7 @@ print(map_4) #print the map
 #save map
 tmap_save(map_4,
   filename = 
-    "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\Close_Up_Sumatra")
+    "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\Close_Up_Sumatra.png")
 
 #Create a stacked bar chart
 #First create a new column with total number of tigers spotted based on gender
@@ -739,10 +739,9 @@ This main visualisation demonstrates that across the three national parks, only 
 
 This bar chart provides a good overview of the number and gender of the tigers residing in the national parks.
 
-## Question 3
-Which national park has the largest Sumatran \textcolor{orange}{tiger} population?
+## Question 3: Which National Park Has The Largest Sumatran \textcolor{orange}{tiger} Population?
 
-Interestingly, Bukit Barisan Selatan had the largest \textcolor{orange}{tiger} population, despite being the smallest park. This could suggest that it has a more robust \textcolor{orange}{tiger} population, with eight male and five female \textcolor{orange}{tiger}, which increases the likelihood of breeding. However, it could also be that fewer tigers were sighted in the other parks as they are considerably larger in size, making tiger camera captures less likely. This is something that future research could establish with monitoring of tigers over a longer period of time, and with more cameras across the landscape.
+Interestingly, Bukit Barisan Selatan had the largest \textcolor{orange}{tiger} population, despite being the smallest park. This could suggest that it has a more robust \textcolor{orange}{tiger} population, with eight male and five female \textcolor{orange}{tiger}, which increases the likelihood of breeding. However, it could also be that fewer \textcolor{orange}{tigers} were sighted in the other parks as they are considerably larger in size, making \textcolor{orange}{tiger} camera captures less likely. This is something that future research could establish with monitoring of tigers over a longer period of time, and with more cameras across the landscape.
  
 Nonetheless, this bar graph demonstrates that ultimately, across eight months of filming, only 24 different \textcolor{orange}{tiger} were spotted across three national parks, a finding which reiterates the importance of conserving the environment, and protecting these \textcolor{orange}{tiger} from harm e.g. from poaching.
 
@@ -792,9 +791,9 @@ This pie chart is important in elucidating the gender proportions of the entire 
 However, the gender of 20.8% of the \textcolor{orange}{tigers} that were sighted could not be identified, which makes it more challenging to comment on what this means for the \textcolor{orange}{tiger} population more generally, yet, when assessing the visualisations together, it is clear to see that regardless of gender proportions, the \textcolor{orange}{tiger} population is extremely small.
  
 # **Conclusions**
-Overall, it is clear to see that the Sumatran \textcolor{orange}{tiger} population is decreasing, with only 24 \textcolor{orange}{tigers} sighted between February-September 2014 across three different national parks. A major contributor to this is the reduction in viable habitats as a result of deforestation and unsustinable agriculture, as represented by Visualisation 1 and 2, which highlight that the most viable habitats at present are three protected national parks. Alongside this, it is clear to see from both visualisation 2 and 3 that there is a larger proportion of male tigers comparatively to females which may exacerbate breeding difficulties and contribute to further decline.
+Overall, it is clear to see that the Sumatran \textcolor{orange}{tiger} population is decreasing, with only 24 \textcolor{orange}{tigers} sighted between February-September 2014 across three different national parks. A major contributor to this is the reduction in viable habitats as a result of deforestation and unsustinable agriculture, as represented by Visualisation 1 and 2, which highlight that the most viable habitats at present are three protected national parks. Alongside this, it is clear to see from both visualisation 2 and 3 that there is a larger proportion of male \textcolor{orange}{tigers} comparatively to females which may exacerbate breeding difficulties and contribute to further decline.
  
-The most important take home mesage from this project, therefore, is that more needs to be done to protect the habitats of the Sumatran \textcolor{orange}{tigers} that remain, as their rapidly declining numbers is a direct result of deforestation and displacement, whereby the number of viable habitations is becoming increasingly restricted.  
+The most important take home message from this project, therefore, is that more needs to be done to protect the habitats of the Sumatran \textcolor{orange}{tigers} that remain, as their rapidly declining numbers is a direct result of deforestation and displacement, whereby the number of viable habitations is becoming increasingly restricted.  
  
 # **Limitations**
 A limitation of this project was that I was unable to extract the exact boundaries of the three national parks from the shapefile of Indonesia. This rendered the presentations of the parks less accurate in visualisation 1 and 2, however, the regions in which the parks were located has still been highlighted, and therefore, the visualisations do still reflect the location and approximate size of each park.
