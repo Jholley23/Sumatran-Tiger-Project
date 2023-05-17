@@ -258,7 +258,7 @@ This map is included to demonstrate the size of Indonesia, to contextualise how 
  
 # Data Visualisation Number 1: Map of Indonesia highlighting The National Parks in Sumatra
 ```{r, include=TRUE, fig.align='center', out.width= "110%", warning=FALSE, error=FALSE}
-#Plot a basic map of Indonesia with pro}
+#Plot a basic map of Indonesia with provinces and national parks
 # Highlight the three national parks on the base map
 #To do this overlay the filtered_data df
 map_2 <- tm_shape(IDN_shapefile) + #Maps the outline of the shapefule
@@ -362,8 +362,9 @@ nationalpark <- tmap_arrange(map_2, map_3, #Group map_2 and map_3 into one view
 
 print(nationalpark)
 
+
 #save map
-tmap_save(map,
+tmap_save(nationalpark,
   filename = 
     "C:\\Users\\jadeh\\OneDrive\\Documents\\Coding Project\\Tmap Figures\\National_Parks.png")
 ```
